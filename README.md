@@ -1,6 +1,6 @@
 this is a "dick" language created by csharp and ANTLR4.
 
-i won't how to make a AST so i use the ANTLR4.Runtime.Standrad.
+idk how to make a AST so i use the ANTLR4.Runtime.Standrad.
 
 this is just a bastard language, and draws on many modern programming languages.
 
