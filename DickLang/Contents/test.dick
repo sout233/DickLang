@@ -30,7 +30,7 @@ else
 // Print("i is " + i);
 // Print("PI is " + PI);
 
-funk MyFunction()
+fuck MyFunction()
 {
     Print(1);
 }

@@ -29,7 +29,7 @@ WHILE: 'dolove' | 'until';
 
 assignment: IDENTIFIER '=' expression;
 
-funcBlock: 'funk' IDENTIFIER funcParaments block;
+funcBlock: 'fuck' IDENTIFIER funcParaments block;
 
 funcParaments: '(' (expression (',' expression)*)? ')';
 

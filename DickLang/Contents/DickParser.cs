@@ -57,7 +57,7 @@ public partial class DickParser : Parser {
 
 	private static readonly string[] _LiteralNames = {
 		null, "';'", "'dick'", "':'", "'='", "':='", "','", "'int'", "'str'", 
-		"'bool'", "'float'", "'else'", "'funk'", "'('", "')'", "'!'", "'*'", "'/'", 
+		"'bool'", "'float'", "'else'", "'fuck'", "'('", "')'", "'!'", "'*'", "'/'", 
 		"'%'", "'+'", "'-'", "'=='", "'!='", "'<'", "'>'", "'<='", "'>='", "'&&'", 
 		"'||'", "'{'", "'}'", "'nig'", "'if'", null, null, null, null, null, "'null'"
 	};
