@@ -1,0 +1,38 @@
+﻿dick i := 0;
+dick nig max := 8;
+dick a: int = 'good';
+
+max = 1;
+
+Print(a);
+
+if max > 5
+{
+    Print("max is greater than 5");
+}
+else
+{
+    Print("max is less than 5");
+}
+
+// 循环
+// until i < max
+// {
+//     Print("i is " + i);
+//     Print("less than " + max);
+//     i = i + 1;
+// }
+// else
+// {
+//     Print("greater than 4");
+// }
+// 
+// Print("i is " + i);
+// Print("PI is " + PI);
+
+funk MyFunction()
+{
+    Print(1);
+}
+
+MyFunction();
