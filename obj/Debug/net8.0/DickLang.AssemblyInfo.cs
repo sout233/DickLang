@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DickLang")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+98152d7da8c16037f10b1ed6e9b2f34a45f51998")]
 [assembly: System.Reflection.AssemblyProductAttribute("DickLang")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DickLang")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
