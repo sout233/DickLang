@@ -9,9 +9,9 @@ statement: (variableDeclaration | assignment | functionCall) ';';
 CONST: 'nig';
 
 variableDeclaration: (
-		'dick' (CONST)? IDENTIFIER (':' type) '=' expression
+		'dick' (CONST)? IDENTIFIER (':' type) '8=D' expression
 	)
-	| ('dick' (CONST)? IDENTIFIER ':=' expression)
+	| ('dick' (CONST)? IDENTIFIER '8==D' expression)
 	| variableDef;
 
 variableDef: 'dick' (CONST)? IDENTIFIER (':' type);

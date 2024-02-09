@@ -15,6 +15,15 @@ public class Program
 
     private static void Main(string[] args)
     {
+        if(args.Length > 0)
+        {
+            fileName = args[0];
+        }
+        else
+        {
+            Console.WriteLine("NO DICK FILE INPUT, WILL USE DEFALUT PATH".Pastel(ConsoleColor.DarkYellow));
+        }
+
         var fileContents = File.ReadAllText(fileName);
 
         AntlrInputStream inputStream = new(fileContents);

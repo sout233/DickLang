@@ -1,6 +1,6 @@
-﻿dick i := 0;
-dick nig max := 8;
-dick a: int = 'good';
+﻿dick i 8==D 0;
+dick nig max 8==D 8;
+dick a: int 8=D 'good';
 
 Print(a);
 
@@ -28,9 +28,9 @@ else
 // Print("i is " + i);
 // Print("PI is " + PI);
 
-fuck MyFunction(dick x:int)
-{
-    Print(x);
-}
+// fuck MyFunction(dick x:int)
+// {
+//    Print(x);
+// }
 
-MyFunction(1);
+// MyFunction(1);
