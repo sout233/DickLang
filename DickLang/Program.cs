@@ -35,7 +35,7 @@ public class Program
         }
         else
         {
-            Console.WriteLine("\nYour DICK has error, PLS check it".Pastel(Color.Red));
+            Console.WriteLine("\nYour DICK has error, PLS check it".Pastel(ConsoleColor.Red));
             Console.WriteLine("Exiting with code 0...");
             Environment.Exit(0);
         }

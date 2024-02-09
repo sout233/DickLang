@@ -209,7 +209,7 @@ namespace DickLang
         public override object VisitFuncBlock([NotNull] FuncBlockContext context)
         {
             var funcName = context.IDENTIFIER().GetText();
-            var paraments = context.funcParaments().expression().Select(p => p.GetText()).ToList();
+            var paraments = context.funcDef().variableDef().Select(p => p.GetText()).ToList();
             var functionBlock = context.block();
 
             _variables[funcName] = new Func<object?[], object?>(args =>
@@ -244,6 +244,9 @@ namespace DickLang
             if (_variables[name] is not Func<object?[], object?> func)
             {
                 throw new DickException($"Fuck {name} is not a function");
+            }
+            foreach(var arg in args){
+                arg.ToString();
             }
 
             return func(args);

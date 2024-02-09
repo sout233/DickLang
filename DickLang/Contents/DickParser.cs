@@ -44,15 +44,16 @@ public partial class DickParser : Parser {
 		IDENTIFIER=40, LINE_COMMENT=41;
 	public const int
 		RULE_program = 0, RULE_line = 1, RULE_statement = 2, RULE_variableDeclaration = 3, 
-		RULE_parameterList = 4, RULE_type = 5, RULE_ifBlock = 6, RULE_elseIfBlock = 7, 
-		RULE_whileBlock = 8, RULE_assignment = 9, RULE_funcBlock = 10, RULE_funcParaments = 11, 
-		RULE_functionCall = 12, RULE_expression = 13, RULE_multOp = 14, RULE_addOp = 15, 
-		RULE_compareOp = 16, RULE_boolOp = 17, RULE_constant = 18, RULE_block = 19;
+		RULE_variableDef = 4, RULE_parameterList = 5, RULE_type = 6, RULE_ifBlock = 7, 
+		RULE_elseIfBlock = 8, RULE_whileBlock = 9, RULE_assignment = 10, RULE_funcBlock = 11, 
+		RULE_funcDef = 12, RULE_funcParaments = 13, RULE_functionCall = 14, RULE_expression = 15, 
+		RULE_multOp = 16, RULE_addOp = 17, RULE_compareOp = 18, RULE_boolOp = 19, 
+		RULE_constant = 20, RULE_block = 21;
 	public static readonly string[] ruleNames = {
-		"program", "line", "statement", "variableDeclaration", "parameterList", 
-		"type", "ifBlock", "elseIfBlock", "whileBlock", "assignment", "funcBlock", 
-		"funcParaments", "functionCall", "expression", "multOp", "addOp", "compareOp", 
-		"boolOp", "constant", "block"
+		"program", "line", "statement", "variableDeclaration", "variableDef", 
+		"parameterList", "type", "ifBlock", "elseIfBlock", "whileBlock", "assignment", 
+		"funcBlock", "funcDef", "funcParaments", "functionCall", "expression", 
+		"multOp", "addOp", "compareOp", "boolOp", "constant", "block"
 	};
 
 	private static readonly string[] _LiteralNames = {
@@ -128,21 +129,21 @@ public partial class DickParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 43;
+			State = 47;
 			ErrorHandler.Sync(this);
 			_la = TokenStream.LA(1);
 			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 1112396533764L) != 0)) {
 				{
 				{
-				State = 40;
+				State = 44;
 				line();
 				}
 				}
-				State = 45;
+				State = 49;
 				ErrorHandler.Sync(this);
 				_la = TokenStream.LA(1);
 			}
-			State = 46;
+			State = 50;
 			Match(Eof);
 			}
 		}
@@ -188,35 +189,35 @@ public partial class DickParser : Parser {
 		LineContext _localctx = new LineContext(Context, State);
 		EnterRule(_localctx, 2, RULE_line);
 		try {
-			State = 52;
+			State = 56;
 			ErrorHandler.Sync(this);
 			switch (TokenStream.LA(1)) {
 			case T__1:
 			case IDENTIFIER:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 48;
+				State = 52;
 				statement();
 				}
 				break;
 			case IF:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 49;
+				State = 53;
 				ifBlock();
 				}
 				break;
 			case WHILE:
 				EnterOuterAlt(_localctx, 3);
 				{
-				State = 50;
+				State = 54;
 				whileBlock();
 				}
 				break;
 			case T__11:
 				EnterOuterAlt(_localctx, 4);
 				{
-				State = 51;
+				State = 55;
 				funcBlock();
 				}
 				break;
@@ -265,29 +266,29 @@ public partial class DickParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 57;
+			State = 61;
 			ErrorHandler.Sync(this);
 			switch ( Interpreter.AdaptivePredict(TokenStream,2,Context) ) {
 			case 1:
 				{
-				State = 54;
+				State = 58;
 				variableDeclaration();
 				}
 				break;
 			case 2:
 				{
-				State = 55;
+				State = 59;
 				assignment();
 				}
 				break;
 			case 3:
 				{
-				State = 56;
+				State = 60;
 				functionCall();
 				}
 				break;
 			}
-			State = 59;
+			State = 63;
 			Match(T__0);
 			}
 		}
@@ -311,6 +312,9 @@ public partial class DickParser : Parser {
 			return GetRuleContext<TypeContext>(0);
 		}
 		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode CONST() { return GetToken(DickParser.CONST, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public VariableDefContext variableDef() {
+			return GetRuleContext<VariableDefContext>(0);
+		}
 		public VariableDeclarationContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
@@ -330,36 +334,36 @@ public partial class DickParser : Parser {
 		EnterRule(_localctx, 6, RULE_variableDeclaration);
 		int _la;
 		try {
-			State = 79;
+			State = 84;
 			ErrorHandler.Sync(this);
 			switch ( Interpreter.AdaptivePredict(TokenStream,5,Context) ) {
 			case 1:
 				EnterOuterAlt(_localctx, 1);
 				{
 				{
-				State = 61;
+				State = 65;
 				Match(T__1);
-				State = 63;
+				State = 67;
 				ErrorHandler.Sync(this);
 				_la = TokenStream.LA(1);
 				if (_la==CONST) {
 					{
-					State = 62;
+					State = 66;
 					Match(CONST);
 					}
 				}
 
-				State = 65;
+				State = 69;
 				Match(IDENTIFIER);
 				{
-				State = 66;
+				State = 70;
 				Match(T__2);
-				State = 67;
+				State = 71;
 				type();
 				}
-				State = 69;
+				State = 73;
 				Match(T__3);
-				State = 70;
+				State = 74;
 				expression(0);
 				}
 				}
@@ -368,27 +372,94 @@ public partial class DickParser : Parser {
 				EnterOuterAlt(_localctx, 2);
 				{
 				{
-				State = 72;
+				State = 76;
 				Match(T__1);
-				State = 74;
+				State = 78;
 				ErrorHandler.Sync(this);
 				_la = TokenStream.LA(1);
 				if (_la==CONST) {
 					{
-					State = 73;
+					State = 77;
 					Match(CONST);
 					}
 				}
 
-				State = 76;
+				State = 80;
 				Match(IDENTIFIER);
-				State = 77;
+				State = 81;
 				Match(T__4);
-				State = 78;
+				State = 82;
 				expression(0);
 				}
 				}
 				break;
+			case 3:
+				EnterOuterAlt(_localctx, 3);
+				{
+				State = 83;
+				variableDef();
+				}
+				break;
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			ErrorHandler.ReportError(this, re);
+			ErrorHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class VariableDefContext : ParserRuleContext {
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode IDENTIFIER() { return GetToken(DickParser.IDENTIFIER, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public TypeContext type() {
+			return GetRuleContext<TypeContext>(0);
+		}
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode CONST() { return GetToken(DickParser.CONST, 0); }
+		public VariableDefContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_variableDef; } }
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IDickVisitor<TResult> typedVisitor = visitor as IDickVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitVariableDef(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public VariableDefContext variableDef() {
+		VariableDefContext _localctx = new VariableDefContext(Context, State);
+		EnterRule(_localctx, 8, RULE_variableDef);
+		int _la;
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 86;
+			Match(T__1);
+			State = 88;
+			ErrorHandler.Sync(this);
+			_la = TokenStream.LA(1);
+			if (_la==CONST) {
+				{
+				State = 87;
+				Match(CONST);
+				}
+			}
+
+			State = 90;
+			Match(IDENTIFIER);
+			{
+			State = 91;
+			Match(T__2);
+			State = 92;
+			type();
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -423,26 +494,26 @@ public partial class DickParser : Parser {
 	[RuleVersion(0)]
 	public ParameterListContext parameterList() {
 		ParameterListContext _localctx = new ParameterListContext(Context, State);
-		EnterRule(_localctx, 8, RULE_parameterList);
+		EnterRule(_localctx, 10, RULE_parameterList);
 		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 81;
+			State = 94;
 			Match(IDENTIFIER);
-			State = 86;
+			State = 99;
 			ErrorHandler.Sync(this);
 			_la = TokenStream.LA(1);
 			while (_la==T__5) {
 				{
 				{
-				State = 82;
+				State = 95;
 				Match(T__5);
-				State = 83;
+				State = 96;
 				Match(IDENTIFIER);
 				}
 				}
-				State = 88;
+				State = 101;
 				ErrorHandler.Sync(this);
 				_la = TokenStream.LA(1);
 			}
@@ -476,12 +547,12 @@ public partial class DickParser : Parser {
 	[RuleVersion(0)]
 	public TypeContext type() {
 		TypeContext _localctx = new TypeContext(Context, State);
-		EnterRule(_localctx, 10, RULE_type);
+		EnterRule(_localctx, 12, RULE_type);
 		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 89;
+			State = 102;
 			_la = TokenStream.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 1920L) != 0)) ) {
 			ErrorHandler.RecoverInline(this);
@@ -530,20 +601,20 @@ public partial class DickParser : Parser {
 	[RuleVersion(0)]
 	public IfBlockContext ifBlock() {
 		IfBlockContext _localctx = new IfBlockContext(Context, State);
-		EnterRule(_localctx, 12, RULE_ifBlock);
+		EnterRule(_localctx, 14, RULE_ifBlock);
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 91;
+			State = 104;
 			Match(IF);
-			State = 92;
+			State = 105;
 			expression(0);
-			State = 93;
+			State = 106;
 			block();
 			{
-			State = 94;
+			State = 107;
 			Match(T__10);
-			State = 95;
+			State = 108;
 			elseIfBlock();
 			}
 			}
@@ -582,22 +653,22 @@ public partial class DickParser : Parser {
 	[RuleVersion(0)]
 	public ElseIfBlockContext elseIfBlock() {
 		ElseIfBlockContext _localctx = new ElseIfBlockContext(Context, State);
-		EnterRule(_localctx, 14, RULE_elseIfBlock);
+		EnterRule(_localctx, 16, RULE_elseIfBlock);
 		try {
-			State = 99;
+			State = 112;
 			ErrorHandler.Sync(this);
 			switch (TokenStream.LA(1)) {
 			case T__28:
 				EnterOuterAlt(_localctx, 1);
 				{
-				State = 97;
+				State = 110;
 				block();
 				}
 				break;
 			case IF:
 				EnterOuterAlt(_localctx, 2);
 				{
-				State = 98;
+				State = 111;
 				ifBlock();
 				}
 				break;
@@ -643,20 +714,20 @@ public partial class DickParser : Parser {
 	[RuleVersion(0)]
 	public WhileBlockContext whileBlock() {
 		WhileBlockContext _localctx = new WhileBlockContext(Context, State);
-		EnterRule(_localctx, 16, RULE_whileBlock);
+		EnterRule(_localctx, 18, RULE_whileBlock);
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 101;
+			State = 114;
 			Match(WHILE);
-			State = 102;
+			State = 115;
 			expression(0);
-			State = 103;
+			State = 116;
 			block();
 			{
-			State = 104;
+			State = 117;
 			Match(T__10);
-			State = 105;
+			State = 118;
 			elseIfBlock();
 			}
 			}
@@ -693,15 +764,15 @@ public partial class DickParser : Parser {
 	[RuleVersion(0)]
 	public AssignmentContext assignment() {
 		AssignmentContext _localctx = new AssignmentContext(Context, State);
-		EnterRule(_localctx, 18, RULE_assignment);
+		EnterRule(_localctx, 20, RULE_assignment);
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 107;
+			State = 120;
 			Match(IDENTIFIER);
-			State = 108;
+			State = 121;
 			Match(T__3);
-			State = 109;
+			State = 122;
 			expression(0);
 			}
 		}
@@ -718,8 +789,8 @@ public partial class DickParser : Parser {
 
 	public partial class FuncBlockContext : ParserRuleContext {
 		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode IDENTIFIER() { return GetToken(DickParser.IDENTIFIER, 0); }
-		[System.Diagnostics.DebuggerNonUserCode] public FuncParamentsContext funcParaments() {
-			return GetRuleContext<FuncParamentsContext>(0);
+		[System.Diagnostics.DebuggerNonUserCode] public FuncDefContext funcDef() {
+			return GetRuleContext<FuncDefContext>(0);
 		}
 		[System.Diagnostics.DebuggerNonUserCode] public BlockContext block() {
 			return GetRuleContext<BlockContext>(0);
@@ -740,18 +811,89 @@ public partial class DickParser : Parser {
 	[RuleVersion(0)]
 	public FuncBlockContext funcBlock() {
 		FuncBlockContext _localctx = new FuncBlockContext(Context, State);
-		EnterRule(_localctx, 20, RULE_funcBlock);
+		EnterRule(_localctx, 22, RULE_funcBlock);
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 111;
+			State = 124;
 			Match(T__11);
-			State = 112;
+			State = 125;
 			Match(IDENTIFIER);
-			State = 113;
-			funcParaments();
-			State = 114;
+			State = 126;
+			funcDef();
+			State = 127;
 			block();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			ErrorHandler.ReportError(this, re);
+			ErrorHandler.Recover(this, re);
+		}
+		finally {
+			ExitRule();
+		}
+		return _localctx;
+	}
+
+	public partial class FuncDefContext : ParserRuleContext {
+		[System.Diagnostics.DebuggerNonUserCode] public VariableDefContext[] variableDef() {
+			return GetRuleContexts<VariableDefContext>();
+		}
+		[System.Diagnostics.DebuggerNonUserCode] public VariableDefContext variableDef(int i) {
+			return GetRuleContext<VariableDefContext>(i);
+		}
+		public FuncDefContext(ParserRuleContext parent, int invokingState)
+			: base(parent, invokingState)
+		{
+		}
+		public override int RuleIndex { get { return RULE_funcDef; } }
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			IDickVisitor<TResult> typedVisitor = visitor as IDickVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFuncDef(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+
+	[RuleVersion(0)]
+	public FuncDefContext funcDef() {
+		FuncDefContext _localctx = new FuncDefContext(Context, State);
+		EnterRule(_localctx, 24, RULE_funcDef);
+		int _la;
+		try {
+			EnterOuterAlt(_localctx, 1);
+			{
+			State = 129;
+			Match(T__12);
+			State = 138;
+			ErrorHandler.Sync(this);
+			_la = TokenStream.LA(1);
+			if (_la==T__1) {
+				{
+				State = 130;
+				variableDef();
+				State = 135;
+				ErrorHandler.Sync(this);
+				_la = TokenStream.LA(1);
+				while (_la==T__5) {
+					{
+					{
+					State = 131;
+					Match(T__5);
+					State = 132;
+					variableDef();
+					}
+					}
+					State = 137;
+					ErrorHandler.Sync(this);
+					_la = TokenStream.LA(1);
+				}
+				}
+			}
+
+			State = 140;
+			Match(T__13);
 			}
 		}
 		catch (RecognitionException re) {
@@ -788,40 +930,40 @@ public partial class DickParser : Parser {
 	[RuleVersion(0)]
 	public FuncParamentsContext funcParaments() {
 		FuncParamentsContext _localctx = new FuncParamentsContext(Context, State);
-		EnterRule(_localctx, 22, RULE_funcParaments);
+		EnterRule(_localctx, 26, RULE_funcParaments);
 		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 116;
+			State = 142;
 			Match(T__12);
-			State = 125;
+			State = 151;
 			ErrorHandler.Sync(this);
 			_la = TokenStream.LA(1);
 			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & 1632087613440L) != 0)) {
 				{
-				State = 117;
+				State = 143;
 				expression(0);
-				State = 122;
+				State = 148;
 				ErrorHandler.Sync(this);
 				_la = TokenStream.LA(1);
 				while (_la==T__5) {
 					{
 					{
-					State = 118;
+					State = 144;
 					Match(T__5);
-					State = 119;
+					State = 145;
 					expression(0);
 					}
 					}
-					State = 124;
+					State = 150;
 					ErrorHandler.Sync(this);
 					_la = TokenStream.LA(1);
 				}
 				}
 			}
 
-			State = 127;
+			State = 153;
 			Match(T__13);
 			}
 		}
@@ -857,13 +999,13 @@ public partial class DickParser : Parser {
 	[RuleVersion(0)]
 	public FunctionCallContext functionCall() {
 		FunctionCallContext _localctx = new FunctionCallContext(Context, State);
-		EnterRule(_localctx, 24, RULE_functionCall);
+		EnterRule(_localctx, 28, RULE_functionCall);
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 129;
+			State = 155;
 			Match(IDENTIFIER);
-			State = 130;
+			State = 156;
 			funcParaments();
 			}
 		}
@@ -1031,22 +1173,22 @@ public partial class DickParser : Parser {
 		int _parentState = State;
 		ExpressionContext _localctx = new ExpressionContext(Context, _parentState);
 		ExpressionContext _prevctx = _localctx;
-		int _startState = 26;
-		EnterRecursionRule(_localctx, 26, RULE_expression, _p);
+		int _startState = 30;
+		EnterRecursionRule(_localctx, 30, RULE_expression, _p);
 		try {
 			int _alt;
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 142;
+			State = 168;
 			ErrorHandler.Sync(this);
-			switch ( Interpreter.AdaptivePredict(TokenStream,10,Context) ) {
+			switch ( Interpreter.AdaptivePredict(TokenStream,13,Context) ) {
 			case 1:
 				{
 				_localctx = new ConstantExpressionContext(_localctx);
 				Context = _localctx;
 				_prevctx = _localctx;
 
-				State = 133;
+				State = 159;
 				constant();
 				}
 				break;
@@ -1055,7 +1197,7 @@ public partial class DickParser : Parser {
 				_localctx = new IdentifierExpressionContext(_localctx);
 				Context = _localctx;
 				_prevctx = _localctx;
-				State = 134;
+				State = 160;
 				Match(IDENTIFIER);
 				}
 				break;
@@ -1064,7 +1206,7 @@ public partial class DickParser : Parser {
 				_localctx = new FunctionCallExpressionContext(_localctx);
 				Context = _localctx;
 				_prevctx = _localctx;
-				State = 135;
+				State = 161;
 				functionCall();
 				}
 				break;
@@ -1073,11 +1215,11 @@ public partial class DickParser : Parser {
 				_localctx = new ParenthesesExpressionContext(_localctx);
 				Context = _localctx;
 				_prevctx = _localctx;
-				State = 136;
+				State = 162;
 				Match(T__12);
-				State = 137;
+				State = 163;
 				expression(0);
-				State = 138;
+				State = 164;
 				Match(T__13);
 				}
 				break;
@@ -1086,35 +1228,35 @@ public partial class DickParser : Parser {
 				_localctx = new NotExpressionContext(_localctx);
 				Context = _localctx;
 				_prevctx = _localctx;
-				State = 140;
+				State = 166;
 				Match(T__14);
-				State = 141;
+				State = 167;
 				expression(5);
 				}
 				break;
 			}
 			Context.Stop = TokenStream.LT(-1);
-			State = 162;
+			State = 188;
 			ErrorHandler.Sync(this);
-			_alt = Interpreter.AdaptivePredict(TokenStream,12,Context);
+			_alt = Interpreter.AdaptivePredict(TokenStream,15,Context);
 			while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					if ( ParseListeners!=null )
 						TriggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					State = 160;
+					State = 186;
 					ErrorHandler.Sync(this);
-					switch ( Interpreter.AdaptivePredict(TokenStream,11,Context) ) {
+					switch ( Interpreter.AdaptivePredict(TokenStream,14,Context) ) {
 					case 1:
 						{
 						_localctx = new MultiplicationExpressionContext(new ExpressionContext(_parentctx, _parentState));
 						PushNewRecursionContext(_localctx, _startState, RULE_expression);
-						State = 144;
+						State = 170;
 						if (!(Precpred(Context, 4))) throw new FailedPredicateException(this, "Precpred(Context, 4)");
-						State = 145;
+						State = 171;
 						multOp();
-						State = 146;
+						State = 172;
 						expression(5);
 						}
 						break;
@@ -1122,11 +1264,11 @@ public partial class DickParser : Parser {
 						{
 						_localctx = new AdditionExpressionContext(new ExpressionContext(_parentctx, _parentState));
 						PushNewRecursionContext(_localctx, _startState, RULE_expression);
-						State = 148;
+						State = 174;
 						if (!(Precpred(Context, 3))) throw new FailedPredicateException(this, "Precpred(Context, 3)");
-						State = 149;
+						State = 175;
 						addOp();
-						State = 150;
+						State = 176;
 						expression(4);
 						}
 						break;
@@ -1134,11 +1276,11 @@ public partial class DickParser : Parser {
 						{
 						_localctx = new ComparisonExpressionContext(new ExpressionContext(_parentctx, _parentState));
 						PushNewRecursionContext(_localctx, _startState, RULE_expression);
-						State = 152;
+						State = 178;
 						if (!(Precpred(Context, 2))) throw new FailedPredicateException(this, "Precpred(Context, 2)");
-						State = 153;
+						State = 179;
 						compareOp();
-						State = 154;
+						State = 180;
 						expression(3);
 						}
 						break;
@@ -1146,20 +1288,20 @@ public partial class DickParser : Parser {
 						{
 						_localctx = new BooleanExpressionContext(new ExpressionContext(_parentctx, _parentState));
 						PushNewRecursionContext(_localctx, _startState, RULE_expression);
-						State = 156;
+						State = 182;
 						if (!(Precpred(Context, 1))) throw new FailedPredicateException(this, "Precpred(Context, 1)");
-						State = 157;
+						State = 183;
 						boolOp();
-						State = 158;
+						State = 184;
 						expression(2);
 						}
 						break;
 					}
 					} 
 				}
-				State = 164;
+				State = 190;
 				ErrorHandler.Sync(this);
-				_alt = Interpreter.AdaptivePredict(TokenStream,12,Context);
+				_alt = Interpreter.AdaptivePredict(TokenStream,15,Context);
 			}
 			}
 		}
@@ -1191,12 +1333,12 @@ public partial class DickParser : Parser {
 	[RuleVersion(0)]
 	public MultOpContext multOp() {
 		MultOpContext _localctx = new MultOpContext(Context, State);
-		EnterRule(_localctx, 28, RULE_multOp);
+		EnterRule(_localctx, 32, RULE_multOp);
 		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 165;
+			State = 191;
 			_la = TokenStream.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 458752L) != 0)) ) {
 			ErrorHandler.RecoverInline(this);
@@ -1235,12 +1377,12 @@ public partial class DickParser : Parser {
 	[RuleVersion(0)]
 	public AddOpContext addOp() {
 		AddOpContext _localctx = new AddOpContext(Context, State);
-		EnterRule(_localctx, 30, RULE_addOp);
+		EnterRule(_localctx, 34, RULE_addOp);
 		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 167;
+			State = 193;
 			_la = TokenStream.LA(1);
 			if ( !(_la==T__18 || _la==T__19) ) {
 			ErrorHandler.RecoverInline(this);
@@ -1279,12 +1421,12 @@ public partial class DickParser : Parser {
 	[RuleVersion(0)]
 	public CompareOpContext compareOp() {
 		CompareOpContext _localctx = new CompareOpContext(Context, State);
-		EnterRule(_localctx, 32, RULE_compareOp);
+		EnterRule(_localctx, 36, RULE_compareOp);
 		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 169;
+			State = 195;
 			_la = TokenStream.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 132120576L) != 0)) ) {
 			ErrorHandler.RecoverInline(this);
@@ -1323,12 +1465,12 @@ public partial class DickParser : Parser {
 	[RuleVersion(0)]
 	public BoolOpContext boolOp() {
 		BoolOpContext _localctx = new BoolOpContext(Context, State);
-		EnterRule(_localctx, 34, RULE_boolOp);
+		EnterRule(_localctx, 38, RULE_boolOp);
 		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 171;
+			State = 197;
 			_la = TokenStream.LA(1);
 			if ( !(_la==T__26 || _la==T__27) ) {
 			ErrorHandler.RecoverInline(this);
@@ -1372,12 +1514,12 @@ public partial class DickParser : Parser {
 	[RuleVersion(0)]
 	public ConstantContext constant() {
 		ConstantContext _localctx = new ConstantContext(Context, State);
-		EnterRule(_localctx, 36, RULE_constant);
+		EnterRule(_localctx, 40, RULE_constant);
 		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 173;
+			State = 199;
 			_la = TokenStream.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 532575944704L) != 0)) ) {
 			ErrorHandler.RecoverInline(this);
@@ -1422,28 +1564,28 @@ public partial class DickParser : Parser {
 	[RuleVersion(0)]
 	public BlockContext block() {
 		BlockContext _localctx = new BlockContext(Context, State);
-		EnterRule(_localctx, 38, RULE_block);
+		EnterRule(_localctx, 42, RULE_block);
 		int _la;
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 175;
+			State = 201;
 			Match(T__28);
-			State = 179;
+			State = 205;
 			ErrorHandler.Sync(this);
 			_la = TokenStream.LA(1);
 			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 1112396533764L) != 0)) {
 				{
 				{
-				State = 176;
+				State = 202;
 				line();
 				}
 				}
-				State = 181;
+				State = 207;
 				ErrorHandler.Sync(this);
 				_la = TokenStream.LA(1);
 			}
-			State = 182;
+			State = 208;
 			Match(T__29);
 			}
 		}
@@ -1460,7 +1602,7 @@ public partial class DickParser : Parser {
 
 	public override bool Sempred(RuleContext _localctx, int ruleIndex, int predIndex) {
 		switch (ruleIndex) {
-		case 13: return expression_sempred((ExpressionContext)_localctx, predIndex);
+		case 15: return expression_sempred((ExpressionContext)_localctx, predIndex);
 		}
 		return true;
 	}
@@ -1475,63 +1617,71 @@ public partial class DickParser : Parser {
 	}
 
 	private static int[] _serializedATN = {
-		4,1,41,185,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,6,2,7,
+		4,1,41,211,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,6,2,7,
 		7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,2,14,7,14,
-		2,15,7,15,2,16,7,16,2,17,7,17,2,18,7,18,2,19,7,19,1,0,5,0,42,8,0,10,0,
-		12,0,45,9,0,1,0,1,0,1,1,1,1,1,1,1,1,3,1,53,8,1,1,2,1,2,1,2,3,2,58,8,2,
-		1,2,1,2,1,3,1,3,3,3,64,8,3,1,3,1,3,1,3,1,3,1,3,1,3,1,3,1,3,1,3,3,3,75,
-		8,3,1,3,1,3,1,3,3,3,80,8,3,1,4,1,4,1,4,5,4,85,8,4,10,4,12,4,88,9,4,1,5,
-		1,5,1,6,1,6,1,6,1,6,1,6,1,6,1,7,1,7,3,7,100,8,7,1,8,1,8,1,8,1,8,1,8,1,
-		8,1,9,1,9,1,9,1,9,1,10,1,10,1,10,1,10,1,10,1,11,1,11,1,11,1,11,5,11,121,
-		8,11,10,11,12,11,124,9,11,3,11,126,8,11,1,11,1,11,1,12,1,12,1,12,1,13,
-		1,13,1,13,1,13,1,13,1,13,1,13,1,13,1,13,1,13,3,13,143,8,13,1,13,1,13,1,
-		13,1,13,1,13,1,13,1,13,1,13,1,13,1,13,1,13,1,13,1,13,1,13,1,13,1,13,5,
-		13,161,8,13,10,13,12,13,164,9,13,1,14,1,14,1,15,1,15,1,16,1,16,1,17,1,
-		17,1,18,1,18,1,19,1,19,5,19,178,8,19,10,19,12,19,181,9,19,1,19,1,19,1,
-		19,0,1,26,20,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,0,
-		6,1,0,7,10,1,0,16,18,1,0,19,20,1,0,21,26,1,0,27,28,1,0,34,38,186,0,43,
-		1,0,0,0,2,52,1,0,0,0,4,57,1,0,0,0,6,79,1,0,0,0,8,81,1,0,0,0,10,89,1,0,
-		0,0,12,91,1,0,0,0,14,99,1,0,0,0,16,101,1,0,0,0,18,107,1,0,0,0,20,111,1,
-		0,0,0,22,116,1,0,0,0,24,129,1,0,0,0,26,142,1,0,0,0,28,165,1,0,0,0,30,167,
-		1,0,0,0,32,169,1,0,0,0,34,171,1,0,0,0,36,173,1,0,0,0,38,175,1,0,0,0,40,
-		42,3,2,1,0,41,40,1,0,0,0,42,45,1,0,0,0,43,41,1,0,0,0,43,44,1,0,0,0,44,
-		46,1,0,0,0,45,43,1,0,0,0,46,47,5,0,0,1,47,1,1,0,0,0,48,53,3,4,2,0,49,53,
-		3,12,6,0,50,53,3,16,8,0,51,53,3,20,10,0,52,48,1,0,0,0,52,49,1,0,0,0,52,
-		50,1,0,0,0,52,51,1,0,0,0,53,3,1,0,0,0,54,58,3,6,3,0,55,58,3,18,9,0,56,
-		58,3,24,12,0,57,54,1,0,0,0,57,55,1,0,0,0,57,56,1,0,0,0,58,59,1,0,0,0,59,
-		60,5,1,0,0,60,5,1,0,0,0,61,63,5,2,0,0,62,64,5,31,0,0,63,62,1,0,0,0,63,
-		64,1,0,0,0,64,65,1,0,0,0,65,66,5,40,0,0,66,67,5,3,0,0,67,68,3,10,5,0,68,
-		69,1,0,0,0,69,70,5,4,0,0,70,71,3,26,13,0,71,80,1,0,0,0,72,74,5,2,0,0,73,
-		75,5,31,0,0,74,73,1,0,0,0,74,75,1,0,0,0,75,76,1,0,0,0,76,77,5,40,0,0,77,
-		78,5,5,0,0,78,80,3,26,13,0,79,61,1,0,0,0,79,72,1,0,0,0,80,7,1,0,0,0,81,
-		86,5,40,0,0,82,83,5,6,0,0,83,85,5,40,0,0,84,82,1,0,0,0,85,88,1,0,0,0,86,
-		84,1,0,0,0,86,87,1,0,0,0,87,9,1,0,0,0,88,86,1,0,0,0,89,90,7,0,0,0,90,11,
-		1,0,0,0,91,92,5,32,0,0,92,93,3,26,13,0,93,94,3,38,19,0,94,95,5,11,0,0,
-		95,96,3,14,7,0,96,13,1,0,0,0,97,100,3,38,19,0,98,100,3,12,6,0,99,97,1,
-		0,0,0,99,98,1,0,0,0,100,15,1,0,0,0,101,102,5,33,0,0,102,103,3,26,13,0,
-		103,104,3,38,19,0,104,105,5,11,0,0,105,106,3,14,7,0,106,17,1,0,0,0,107,
-		108,5,40,0,0,108,109,5,4,0,0,109,110,3,26,13,0,110,19,1,0,0,0,111,112,
-		5,12,0,0,112,113,5,40,0,0,113,114,3,22,11,0,114,115,3,38,19,0,115,21,1,
-		0,0,0,116,125,5,13,0,0,117,122,3,26,13,0,118,119,5,6,0,0,119,121,3,26,
-		13,0,120,118,1,0,0,0,121,124,1,0,0,0,122,120,1,0,0,0,122,123,1,0,0,0,123,
-		126,1,0,0,0,124,122,1,0,0,0,125,117,1,0,0,0,125,126,1,0,0,0,126,127,1,
-		0,0,0,127,128,5,14,0,0,128,23,1,0,0,0,129,130,5,40,0,0,130,131,3,22,11,
-		0,131,25,1,0,0,0,132,133,6,13,-1,0,133,143,3,36,18,0,134,143,5,40,0,0,
-		135,143,3,24,12,0,136,137,5,13,0,0,137,138,3,26,13,0,138,139,5,14,0,0,
-		139,143,1,0,0,0,140,141,5,15,0,0,141,143,3,26,13,5,142,132,1,0,0,0,142,
-		134,1,0,0,0,142,135,1,0,0,0,142,136,1,0,0,0,142,140,1,0,0,0,143,162,1,
-		0,0,0,144,145,10,4,0,0,145,146,3,28,14,0,146,147,3,26,13,5,147,161,1,0,
-		0,0,148,149,10,3,0,0,149,150,3,30,15,0,150,151,3,26,13,4,151,161,1,0,0,
-		0,152,153,10,2,0,0,153,154,3,32,16,0,154,155,3,26,13,3,155,161,1,0,0,0,
-		156,157,10,1,0,0,157,158,3,34,17,0,158,159,3,26,13,2,159,161,1,0,0,0,160,
-		144,1,0,0,0,160,148,1,0,0,0,160,152,1,0,0,0,160,156,1,0,0,0,161,164,1,
-		0,0,0,162,160,1,0,0,0,162,163,1,0,0,0,163,27,1,0,0,0,164,162,1,0,0,0,165,
-		166,7,1,0,0,166,29,1,0,0,0,167,168,7,2,0,0,168,31,1,0,0,0,169,170,7,3,
-		0,0,170,33,1,0,0,0,171,172,7,4,0,0,172,35,1,0,0,0,173,174,7,5,0,0,174,
-		37,1,0,0,0,175,179,5,29,0,0,176,178,3,2,1,0,177,176,1,0,0,0,178,181,1,
-		0,0,0,179,177,1,0,0,0,179,180,1,0,0,0,180,182,1,0,0,0,181,179,1,0,0,0,
-		182,183,5,30,0,0,183,39,1,0,0,0,14,43,52,57,63,74,79,86,99,122,125,142,
-		160,162,179
+		2,15,7,15,2,16,7,16,2,17,7,17,2,18,7,18,2,19,7,19,2,20,7,20,2,21,7,21,
+		1,0,5,0,46,8,0,10,0,12,0,49,9,0,1,0,1,0,1,1,1,1,1,1,1,1,3,1,57,8,1,1,2,
+		1,2,1,2,3,2,62,8,2,1,2,1,2,1,3,1,3,3,3,68,8,3,1,3,1,3,1,3,1,3,1,3,1,3,
+		1,3,1,3,1,3,3,3,79,8,3,1,3,1,3,1,3,1,3,3,3,85,8,3,1,4,1,4,3,4,89,8,4,1,
+		4,1,4,1,4,1,4,1,5,1,5,1,5,5,5,98,8,5,10,5,12,5,101,9,5,1,6,1,6,1,7,1,7,
+		1,7,1,7,1,7,1,7,1,8,1,8,3,8,113,8,8,1,9,1,9,1,9,1,9,1,9,1,9,1,10,1,10,
+		1,10,1,10,1,11,1,11,1,11,1,11,1,11,1,12,1,12,1,12,1,12,5,12,134,8,12,10,
+		12,12,12,137,9,12,3,12,139,8,12,1,12,1,12,1,13,1,13,1,13,1,13,5,13,147,
+		8,13,10,13,12,13,150,9,13,3,13,152,8,13,1,13,1,13,1,14,1,14,1,14,1,15,
+		1,15,1,15,1,15,1,15,1,15,1,15,1,15,1,15,1,15,3,15,169,8,15,1,15,1,15,1,
+		15,1,15,1,15,1,15,1,15,1,15,1,15,1,15,1,15,1,15,1,15,1,15,1,15,1,15,5,
+		15,187,8,15,10,15,12,15,190,9,15,1,16,1,16,1,17,1,17,1,18,1,18,1,19,1,
+		19,1,20,1,20,1,21,1,21,5,21,204,8,21,10,21,12,21,207,9,21,1,21,1,21,1,
+		21,0,1,30,22,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,
+		42,0,6,1,0,7,10,1,0,16,18,1,0,19,20,1,0,21,26,1,0,27,28,1,0,34,38,214,
+		0,47,1,0,0,0,2,56,1,0,0,0,4,61,1,0,0,0,6,84,1,0,0,0,8,86,1,0,0,0,10,94,
+		1,0,0,0,12,102,1,0,0,0,14,104,1,0,0,0,16,112,1,0,0,0,18,114,1,0,0,0,20,
+		120,1,0,0,0,22,124,1,0,0,0,24,129,1,0,0,0,26,142,1,0,0,0,28,155,1,0,0,
+		0,30,168,1,0,0,0,32,191,1,0,0,0,34,193,1,0,0,0,36,195,1,0,0,0,38,197,1,
+		0,0,0,40,199,1,0,0,0,42,201,1,0,0,0,44,46,3,2,1,0,45,44,1,0,0,0,46,49,
+		1,0,0,0,47,45,1,0,0,0,47,48,1,0,0,0,48,50,1,0,0,0,49,47,1,0,0,0,50,51,
+		5,0,0,1,51,1,1,0,0,0,52,57,3,4,2,0,53,57,3,14,7,0,54,57,3,18,9,0,55,57,
+		3,22,11,0,56,52,1,0,0,0,56,53,1,0,0,0,56,54,1,0,0,0,56,55,1,0,0,0,57,3,
+		1,0,0,0,58,62,3,6,3,0,59,62,3,20,10,0,60,62,3,28,14,0,61,58,1,0,0,0,61,
+		59,1,0,0,0,61,60,1,0,0,0,62,63,1,0,0,0,63,64,5,1,0,0,64,5,1,0,0,0,65,67,
+		5,2,0,0,66,68,5,31,0,0,67,66,1,0,0,0,67,68,1,0,0,0,68,69,1,0,0,0,69,70,
+		5,40,0,0,70,71,5,3,0,0,71,72,3,12,6,0,72,73,1,0,0,0,73,74,5,4,0,0,74,75,
+		3,30,15,0,75,85,1,0,0,0,76,78,5,2,0,0,77,79,5,31,0,0,78,77,1,0,0,0,78,
+		79,1,0,0,0,79,80,1,0,0,0,80,81,5,40,0,0,81,82,5,5,0,0,82,85,3,30,15,0,
+		83,85,3,8,4,0,84,65,1,0,0,0,84,76,1,0,0,0,84,83,1,0,0,0,85,7,1,0,0,0,86,
+		88,5,2,0,0,87,89,5,31,0,0,88,87,1,0,0,0,88,89,1,0,0,0,89,90,1,0,0,0,90,
+		91,5,40,0,0,91,92,5,3,0,0,92,93,3,12,6,0,93,9,1,0,0,0,94,99,5,40,0,0,95,
+		96,5,6,0,0,96,98,5,40,0,0,97,95,1,0,0,0,98,101,1,0,0,0,99,97,1,0,0,0,99,
+		100,1,0,0,0,100,11,1,0,0,0,101,99,1,0,0,0,102,103,7,0,0,0,103,13,1,0,0,
+		0,104,105,5,32,0,0,105,106,3,30,15,0,106,107,3,42,21,0,107,108,5,11,0,
+		0,108,109,3,16,8,0,109,15,1,0,0,0,110,113,3,42,21,0,111,113,3,14,7,0,112,
+		110,1,0,0,0,112,111,1,0,0,0,113,17,1,0,0,0,114,115,5,33,0,0,115,116,3,
+		30,15,0,116,117,3,42,21,0,117,118,5,11,0,0,118,119,3,16,8,0,119,19,1,0,
+		0,0,120,121,5,40,0,0,121,122,5,4,0,0,122,123,3,30,15,0,123,21,1,0,0,0,
+		124,125,5,12,0,0,125,126,5,40,0,0,126,127,3,24,12,0,127,128,3,42,21,0,
+		128,23,1,0,0,0,129,138,5,13,0,0,130,135,3,8,4,0,131,132,5,6,0,0,132,134,
+		3,8,4,0,133,131,1,0,0,0,134,137,1,0,0,0,135,133,1,0,0,0,135,136,1,0,0,
+		0,136,139,1,0,0,0,137,135,1,0,0,0,138,130,1,0,0,0,138,139,1,0,0,0,139,
+		140,1,0,0,0,140,141,5,14,0,0,141,25,1,0,0,0,142,151,5,13,0,0,143,148,3,
+		30,15,0,144,145,5,6,0,0,145,147,3,30,15,0,146,144,1,0,0,0,147,150,1,0,
+		0,0,148,146,1,0,0,0,148,149,1,0,0,0,149,152,1,0,0,0,150,148,1,0,0,0,151,
+		143,1,0,0,0,151,152,1,0,0,0,152,153,1,0,0,0,153,154,5,14,0,0,154,27,1,
+		0,0,0,155,156,5,40,0,0,156,157,3,26,13,0,157,29,1,0,0,0,158,159,6,15,-1,
+		0,159,169,3,40,20,0,160,169,5,40,0,0,161,169,3,28,14,0,162,163,5,13,0,
+		0,163,164,3,30,15,0,164,165,5,14,0,0,165,169,1,0,0,0,166,167,5,15,0,0,
+		167,169,3,30,15,5,168,158,1,0,0,0,168,160,1,0,0,0,168,161,1,0,0,0,168,
+		162,1,0,0,0,168,166,1,0,0,0,169,188,1,0,0,0,170,171,10,4,0,0,171,172,3,
+		32,16,0,172,173,3,30,15,5,173,187,1,0,0,0,174,175,10,3,0,0,175,176,3,34,
+		17,0,176,177,3,30,15,4,177,187,1,0,0,0,178,179,10,2,0,0,179,180,3,36,18,
+		0,180,181,3,30,15,3,181,187,1,0,0,0,182,183,10,1,0,0,183,184,3,38,19,0,
+		184,185,3,30,15,2,185,187,1,0,0,0,186,170,1,0,0,0,186,174,1,0,0,0,186,
+		178,1,0,0,0,186,182,1,0,0,0,187,190,1,0,0,0,188,186,1,0,0,0,188,189,1,
+		0,0,0,189,31,1,0,0,0,190,188,1,0,0,0,191,192,7,1,0,0,192,33,1,0,0,0,193,
+		194,7,2,0,0,194,35,1,0,0,0,195,196,7,3,0,0,196,37,1,0,0,0,197,198,7,4,
+		0,0,198,39,1,0,0,0,199,200,7,5,0,0,200,41,1,0,0,0,201,205,5,29,0,0,202,
+		204,3,2,1,0,203,202,1,0,0,0,204,207,1,0,0,0,205,203,1,0,0,0,205,206,1,
+		0,0,0,206,208,1,0,0,0,207,205,1,0,0,0,208,209,5,30,0,0,209,43,1,0,0,0,
+		17,47,56,61,67,78,84,88,99,112,135,138,148,151,168,186,188,205
 	};
 
 	public static readonly ATN _ATN =

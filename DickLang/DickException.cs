@@ -24,6 +24,22 @@ namespace DickLang
         }
     }
 
+    public static class ColoredConsole
+    {
+        public static void WriteLine(string message, ConsoleColor consoleColor = ConsoleColor.White)
+        {
+            Console.ForegroundColor = consoleColor;
+            Console.WriteLine(message);
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+        public static void Write(string message, ConsoleColor consoleColor = ConsoleColor.White)
+        {
+            Console.ForegroundColor = consoleColor;
+            Console.Write(message);
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+    }
+
     public static class DickExceptionDo
     {
         public static void Out(int line = -1, int charPositionInLine = -1, string offendingSymbol = null, string msg = "", bool exit = true)
@@ -54,26 +70,30 @@ namespace DickLang
                 }
             }
 
-            Console.WriteLine("\nYOUR DICK HAS ERROR: ".Pastel(Color.IndianRed) + msg.Pastel(Color.Azure));
-            Console.WriteLine($"{"At Fucking Line".Pastel(Color.BlueViolet)}: {line}:({charPositionInLine})");
-            Console.WriteLine($"{"At Fucking File".Pastel(Color.BlueViolet)}: {fileName}");
+            ColoredConsole.Write($"\nYOUR DICK HAS ERROR: ", ConsoleColor.Red);
+            ColoredConsole.WriteLine(msg);
+            ColoredConsole.Write("At fucking file-> ", ConsoleColor.Blue);
+            ColoredConsole.WriteLine($"{fileName}");
+            ColoredConsole.Write("At fucking pos -> ", ConsoleColor.Blue);
+            ColoredConsole.WriteLine($"{line}:{charPositionInLine}");
 
-            Console.Write("\t");
+            Console.WriteLine("\t| ");
+            Console.Write($"\t{line} ");
 
             Console.WriteLine(lineText);
 
-            Console.Write("\t");
+            Console.Write("\t| ");
 
             for (int i = 0; i < charPositionInLine; i++)
             {
                 Console.Write(" ");
             }
-            for (int i = 0; i <= offendingSymbol.Length; i++)
+            for (int i = 0; i < offendingSymbol.Length; i++)
             {
-                Console.Write("^".Pastel(Color.IndianRed));
+                ColoredConsole.Write("^", ConsoleColor.Red);
             }
 
-            Console.WriteLine($" - {msg}".Pastel(Color.IndianRed));
+            ColoredConsole.WriteLine($" - {msg}", ConsoleColor.Red);
 
             if (exit)
                 Environment.Exit(0);

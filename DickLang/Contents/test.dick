@@ -2,8 +2,6 @@
 dick nig max := 8;
 dick a: int = 'good';
 
-max = 1;
-
 Print(a);
 
 if max > 5
@@ -30,9 +28,9 @@ else
 // Print("i is " + i);
 // Print("PI is " + PI);
 
-fuck MyFunction()
+fuck MyFunction(dick x:int)
 {
-    Print(1);
+    Print(x);
 }
 
-MyFunction();
+MyFunction(1);

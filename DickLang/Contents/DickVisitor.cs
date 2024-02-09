@@ -56,6 +56,12 @@ public interface IDickVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitVariableDeclaration([NotNull] DickParser.VariableDeclarationContext context);
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="DickParser.variableDef"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitVariableDef([NotNull] DickParser.VariableDefContext context);
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="DickParser.parameterList"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -97,6 +103,12 @@ public interface IDickVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitFuncBlock([NotNull] DickParser.FuncBlockContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="DickParser.funcDef"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitFuncDef([NotNull] DickParser.FuncDefContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="DickParser.funcParaments"/>.
 	/// </summary>

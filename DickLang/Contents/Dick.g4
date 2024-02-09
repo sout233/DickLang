@@ -11,7 +11,10 @@ CONST: 'nig';
 variableDeclaration: (
 		'dick' (CONST)? IDENTIFIER (':' type) '=' expression
 	)
-	| ('dick' (CONST)? IDENTIFIER ':=' expression);
+	| ('dick' (CONST)? IDENTIFIER ':=' expression)
+	| variableDef;
+
+variableDef: 'dick' (CONST)? IDENTIFIER (':' type);
 
 parameterList: IDENTIFIER (',' IDENTIFIER)*;
 
@@ -29,7 +32,9 @@ WHILE: 'dolove' | 'until';
 
 assignment: IDENTIFIER '=' expression;
 
-funcBlock: 'fuck' IDENTIFIER funcParaments block;
+funcBlock: 'fuck' IDENTIFIER funcDef block;
+
+funcDef: '(' (variableDef (',' variableDef)*)? ')';
 
 funcParaments: '(' (expression (',' expression)*)? ')';
 
