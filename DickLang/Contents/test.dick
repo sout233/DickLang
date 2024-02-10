@@ -1,36 +1,8 @@
-﻿dick i 8==D 0;
-dick nig max 8==D 8;
-dick a: int 8=D 'good';
-
-Print(a);
-
-if max > 5
+﻿fuck MyFunction(dick x: int, dick y: int)
 {
-    Print("max is greater than 5");
-}
-else
-{
-    Print("max is less than 5");
+   // Print(x + y);
+   return 30 % 4 + y; 
 }
 
-// 循环
-// until i < max
-// {
-//     Print("i is " + i);
-//     Print("less than " + max);
-//     i = i + 1;
-// }
-// else
-// {
-//     Print("greater than 4");
-// }
-// 
-// Print("i is " + i);
-// Print("PI is " + PI);
-
-// fuck MyFunction(dick x:int)
-// {
-//    Print(x);
-// }
-
-// MyFunction(1);
+dick mf 8==D MyFunction(2, 1);
+Print(mf);

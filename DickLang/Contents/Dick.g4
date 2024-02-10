@@ -2,21 +2,19 @@ grammar Dick;
 
 program: line* EOF;
 
-line: statement | ifBlock | whileBlock | funcBlock;
+line: statement | returnStatement | ifBlock | whileBlock | funcBlock;
 
 statement: (variableDeclaration | assignment | functionCall) ';';
 
 CONST: 'nig';
 
 variableDeclaration: (
-		'dick' (CONST)? IDENTIFIER (':' type) '8=D' expression
+		'dick' (CONST)? IDENTIFIER (':' type) '8==D' expression
 	)
 	| ('dick' (CONST)? IDENTIFIER '8==D' expression)
 	| variableDef;
 
-variableDef: 'dick' (CONST)? IDENTIFIER (':' type);
-
-parameterList: IDENTIFIER (',' IDENTIFIER)*;
+variableDef: 'dick' (CONST)? IDENTIFIER (':' type)?;
 
 type: 'int' | 'str' | 'bool' | 'float';
 
@@ -39,6 +37,8 @@ funcDef: '(' (variableDef (',' variableDef)*)? ')';
 funcParaments: '(' (expression (',' expression)*)? ')';
 
 functionCall: IDENTIFIER funcParaments;
+
+returnStatement: 'return' expression ';';
 
 expression:
 	constant							# constantExpression

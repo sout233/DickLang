@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Antlr4.Runtime;
 using Pastel;
@@ -38,18 +39,29 @@ namespace DickLang
             Console.Write(message);
             Console.ForegroundColor = ConsoleColor.White;
         }
+
+        public static void WriteBackspaces(string count)
+        {
+            for (int i = 0; i < count.Length - 1; i++)
+            {
+                Console.Write("\b");
+            }
+        }
     }
 
     public static class DickExceptionDo
     {
         public static void Out(int line = -1, int charPositionInLine = -1, string offendingSymbol = null, string msg = "", bool exit = true)
         {
+            foreach (var v in DickGet.Variables)
+            { Console.WriteLine($"{v.Key}: {v.Value}".Pastel(Color.Aqua)); }
+
             string fileName = Program.fileName;
             string lineText;
 
             if (charPositionInLine == -1)
             {
-                charPositionInLine = DickGet.CurrentLine.IndexOf(offendingSymbol);
+                charPositionInLine = DickGet.CurrentLineText.IndexOf(offendingSymbol);
             }
 
             var lines = File.ReadAllLines(fileName);
@@ -59,15 +71,24 @@ namespace DickLang
             }
             else
             {
-                lineText = DickGet.CurrentLine;
-                for (int i = 0; i < lines.Length; i++)
+                int exLineCount = 0;
+                using (StreamReader reader = new StreamReader(Program.fileName))
                 {
-                    if (lines[i].Contains(offendingSymbol))
+                    string fileLine;
+                    while ((fileLine = reader.ReadLine()) != null)
                     {
-                        line = i + 1;
-                        break;
+                        if (Regex.IsMatch(fileLine.TrimStart(), @"^//"))
+                        {
+                            exLineCount++;
+                        }
+                        else if (string.IsNullOrWhiteSpace(fileLine))
+                        {
+                            exLineCount++;
+                        }
                     }
                 }
+                lineText = DickGet.CurrentLineText;
+                line = DickGet.CurrentLineCount + exLineCount;
             }
 
             ColoredConsole.Write($"\nYOUR DICK HAS ERROR: ", ConsoleColor.Red);
@@ -77,12 +98,15 @@ namespace DickLang
             ColoredConsole.Write("At fucking pos -> ", ConsoleColor.Blue);
             ColoredConsole.WriteLine($"{line}:{charPositionInLine}");
 
-            Console.WriteLine("\t| ");
-            Console.Write($"\t{line} ");
+            Console.Write("    | \n    ");
+            ColoredConsole.WriteBackspaces(line.ToString());
+
+            Console.Write($"{line} ");
+
 
             Console.WriteLine(lineText);
 
-            Console.Write("\t| ");
+            Console.Write("    | ");
 
             for (int i = 0; i < charPositionInLine; i++)
             {

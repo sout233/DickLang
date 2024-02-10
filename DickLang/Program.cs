@@ -39,7 +39,7 @@ public class Program
 
         if (!isHasError)
         {
-            DickGet.CurrentLine = File.ReadAllLines(fileName)[programContext.Start.Line - 1];
+            DickGet.CurrentLineText = File.ReadAllLines(fileName)[programContext.Start.Line - 1];
             dickGet.Visit(programContext);
         }
         else

@@ -1,6 +1,8 @@
 ﻿using Antlr4.Runtime.Misc;
+using Pastel;
 using System;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using static DickParser;
 
@@ -8,11 +10,12 @@ namespace DickLang
 {
     public class DickGet : DickBaseVisitor<object?>
     {
-        private Dictionary<string, object> _variables = new();
+        private static Dictionary<string, object> _variables = new();
 
         private Dictionary<string, bool> _variableMutability = new();
 
-        public static string CurrentLine { get; set; } = "";
+        public static string CurrentLineText { get; set; } = "";
+        public static int CurrentLineCount { get; set; } = 1;
 
         public DickGet()
         {
@@ -20,6 +23,8 @@ namespace DickLang
             _variables["E"] = (float)Math.E;
             _variables["Print"] = new Func<object?[], object?>(Print);
         }
+
+        public static Dictionary<string, object> Variables { get { return _variables; } }
 
         private object? Print(object?[] args)
         {
@@ -32,7 +37,8 @@ namespace DickLang
 
         public override object? VisitStatement([NotNull] StatementContext context)
         {
-            CurrentLine = context.GetText();
+            CurrentLineText = context.GetText();
+            CurrentLineCount++;
             return base.VisitStatement(context);
         }
 
@@ -97,6 +103,16 @@ namespace DickLang
             return _variables[varName];
         }
 
+        public override object VisitFunctionCallExpression([NotNull] FunctionCallExpressionContext context)
+        {
+            return VisitFunctionCall(context.functionCall());
+        }
+
+        public override object? VisitReturnStatement([NotNull] ReturnStatementContext context)
+        {
+            return context.expression().Accept(this);
+        }
+
         public override object VisitAdditionExpression([NotNull] AdditionExpressionContext context)
         {
             var left = Visit(context.expression(0));
@@ -106,48 +122,25 @@ namespace DickLang
 
             return op switch
             {
-                "+" => Add(left, right),
-                "-" => Subtract(left, right),
+                "+" => DickValueProcess.Add(left, right),
+                "-" => DickValueProcess.Subtract(left, right),
                 _ => throw new NotImplementedException()
             };
         }
-
-        public object Add(object? left, object? right)
+        public override object VisitMultiplicationExpression([NotNull] MultiplicationExpressionContext context)
         {
-            if (left is int l && right is int r)
-                return l + r;
-            if (left is float lf && right is float rf)
-                return lf + rf;
-            if (left is int li2 && right is float rf2)
-                return li2 + rf2;
-            if (left is float lf3 && right is int ri3)
-                return lf3 + ri3;
-            if (left is string ls && right is string rs)
-                return ls + rs;
-            if (left is string ls2 && right is int ri4)
-                return ls2 + ri4.ToString();
-            if (left is int li && right is string rs2)
-                return li.ToString() + rs2;
-            if (left is float lf4 && right is string rs3)
-                return lf4.ToString() + rs3;
-            if (left is string ls3 && right is float rf4)
-                return ls3 + rf4.ToString();
+            var left = Visit(context.expression(0));
+            var right = Visit(context.expression(1));
 
-            throw new Exception($"Cannot add dicks of types {left?.GetType()} and {right?.GetType()}");
-        }
+            var op = context.multOp().GetText();
 
-        public object Subtract(object? left, object? right)
-        {
-            if (left is int l && right is int r)
-                return l - r;
-            if (left is float lf && right is float rf)
-                return lf - rf;
-            if (left is int li2 && right is float rf2)
-                return li2 - rf2;
-            if (left is float lf3 && right is int ri3)
-                return lf3 - ri3;
-
-            throw new Exception($"Cannot subtract dicks of types {left?.GetType()} and {right?.GetType()}");
+            return op switch
+            {
+                "*" => DickValueProcess.Multiply(left, right),
+                "/" => DickValueProcess.Subtract(left, right),
+                "%" => DickValueProcess.Modulo(left, right),
+                _ => throw new NotImplementedException()
+            };
         }
 
         public override object? VisitWhileBlock([NotNull] WhileBlockContext context)
@@ -210,17 +203,29 @@ namespace DickLang
         {
             var funcName = context.IDENTIFIER().GetText();
             var paraments = context.funcDef().variableDef().Select(p => p.GetText()).ToList();
+            var paraVarNames = context.funcDef().variableDef().Select(p => p.IDENTIFIER().GetText()).ToList();
             var functionBlock = context.block();
 
             _variables[funcName] = new Func<object?[], object?>(args =>
             {
-                var functionScope = new Dictionary<string, object>();
-                if (paraments != null && args != null && paraments.Count == args.Length)
+                var paraVarValues = new List<object>();
+
+                if (paraments.Count != args.Length)
+                {
+                    DickExceptionDo.Out(msg: $"Missing arguments for '{funcName}'. Expected {paraments.Count} arguments, but got {args.Length}.", offendingSymbol: funcName, exit: false);
+                }
+
+                if (paraments != null && args != null)
                 {
                     for (int i = 0; i < paraments.Count; i++)
                     {
-                        functionScope[paraments[i]] = args[i];
+                        paraVarValues.Add(args[i] ?? -1);
                     }
+                }
+
+                for (int i = 0; i < paraVarValues.Count; i++)
+                {
+                    _variables[paraVarNames[i]] = paraVarValues[i];
                 }
 
                 var result = Visit(functionBlock);
@@ -228,6 +233,22 @@ namespace DickLang
                 return result;
             });
 
+            return null;
+        }
+
+        public override object VisitBlock([NotNull] BlockContext context)
+        {
+            foreach (var lineContext in context.line())
+            {
+                if (lineContext.returnStatement() != null)
+                {
+                    return VisitReturnStatement(lineContext.returnStatement());
+                }
+                else
+                {
+                    VisitStatement(lineContext.statement());
+                }
+            }
             return null;
         }
 
@@ -245,7 +266,9 @@ namespace DickLang
             {
                 throw new DickException($"Fuck {name} is not a function");
             }
-            foreach(var arg in args){
+
+            foreach (var arg in args)
+            {
                 arg.ToString();
             }
 
