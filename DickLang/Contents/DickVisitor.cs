@@ -56,6 +56,12 @@ public interface IDickVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitVariableDeclaration([NotNull] DickParser.VariableDeclarationContext context);
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="DickParser.ignmentSymbol"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitIgnmentSymbol([NotNull] DickParser.IgnmentSymbolContext context);
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="DickParser.variableDef"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -67,6 +73,18 @@ public interface IDickVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitType([NotNull] DickParser.TypeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="DickParser.arrayLiteral"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitArrayLiteral([NotNull] DickParser.ArrayLiteralContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="DickParser.arrayAccess"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitArrayAccess([NotNull] DickParser.ArrayAccessContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="DickParser.ifBlock"/>.
 	/// </summary>
@@ -122,12 +140,26 @@ public interface IDickVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitReturnStatement([NotNull] DickParser.ReturnStatementContext context);
 	/// <summary>
+	/// Visit a parse tree produced by the <c>arrayAccessExpression</c>
+	/// labeled alternative in <see cref="DickParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitArrayAccessExpression([NotNull] DickParser.ArrayAccessExpressionContext context);
+	/// <summary>
 	/// Visit a parse tree produced by the <c>parenthesesExpression</c>
 	/// labeled alternative in <see cref="DickParser.expression"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitParenthesesExpression([NotNull] DickParser.ParenthesesExpressionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>arrayLiteralExpression</c>
+	/// labeled alternative in <see cref="DickParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitArrayLiteralExpression([NotNull] DickParser.ArrayLiteralExpressionContext context);
 	/// <summary>
 	/// Visit a parse tree produced by the <c>constantExpression</c>
 	/// labeled alternative in <see cref="DickParser.expression"/>.

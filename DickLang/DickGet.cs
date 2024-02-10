@@ -4,6 +4,7 @@ using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Text.RegularExpressions;
 using static DickParser;
 
 namespace DickLang
@@ -30,7 +31,17 @@ namespace DickLang
         {
             foreach (var arg in args)
             {
-                Console.WriteLine(arg);
+                if (arg is Array)
+                {
+                    string[] strings = (arg as object[]).Select(obj => obj.ToString()).ToArray();
+
+                    string arrayString = "[" + string.Join(", ", strings) + "]";
+                    Console.WriteLine(arrayString);
+                }
+                else
+                {
+                    Console.WriteLine(arg);
+                }
             }
             return null;
         }
@@ -127,6 +138,7 @@ namespace DickLang
                 _ => throw new NotImplementedException()
             };
         }
+
         public override object VisitMultiplicationExpression([NotNull] MultiplicationExpressionContext context)
         {
             var left = Visit(context.expression(0));
@@ -141,6 +153,74 @@ namespace DickLang
                 "%" => DickValueProcess.Modulo(left, right),
                 _ => throw new NotImplementedException()
             };
+        }
+
+        public override object VisitComparisonExpression([NotNull] ComparisonExpressionContext context)
+        {
+            var left = Visit(context.expression(0));
+            var right = Visit(context.expression(1));
+
+            var op = context.compareOp().GetText();
+
+            return op switch
+            {
+                "<" => DickValueProcess.LessThan(left, right),
+                "<=" => DickValueProcess.LessThanOrEqual(left, right),
+                ">" => DickValueProcess.GreaterThan(left, right),
+                ">=" => DickValueProcess.GreaterThanOrEqual(left, right),
+                "==" => DickValueProcess.IsEqual(left, right),
+                "!=" => DickValueProcess.NotEqual(left, right),
+                _ => throw new NotImplementedException()
+            };
+        }
+
+        public override object VisitArrayLiteralExpression([NotNull] ArrayLiteralExpressionContext context)
+        {
+            return VisitArrayLiteral(context.arrayLiteral());
+        }
+
+        public override object VisitArrayLiteral([NotNull] ArrayLiteralContext context)
+        {
+            var array = context.expression().Select(Visit).ToArray();
+            return array;
+        }
+
+        public override object VisitArrayAccess([NotNull] ArrayAccessContext context)
+        {
+            var array = (object[])_variables[context.IDENTIFIER().GetText()];
+            Regex reg = new Regex("^[1-9]\\d*$");
+
+            int index = 0;
+            var argString = context.expression().GetText();
+
+            if (reg.Match(argString).Success)
+            {
+                index = int.Parse(argString);
+            }
+            else if (_variables[argString] is int _index)
+            {
+                index = _index;
+            }
+            else
+            {
+                DickExceptionDo.Out(msg: $"Cannot get the index of the array.", exit: false);
+            }
+
+            if (index > array.Length)
+            {
+                DickExceptionDo.Out(msg: $"Index was fucking outside the bounds of the array.", exit: false);
+            }
+            else
+            {
+                var value = array[index];
+                return value;
+            }
+            return null;
+        }
+
+        public override object VisitArrayAccessExpression([NotNull] ArrayAccessExpressionContext context)
+        {
+            return VisitArrayAccess(context.arrayAccess());
         }
 
         public override object? VisitWhileBlock([NotNull] WhileBlockContext context)
@@ -177,26 +257,6 @@ namespace DickLang
             }
 
             return null;
-        }
-
-
-        public override object VisitComparisonExpression([NotNull] ComparisonExpressionContext context)
-        {
-            var left = Visit(context.expression(0));
-            var right = Visit(context.expression(1));
-
-            var op = context.compareOp().GetText();
-
-            return op switch
-            {
-                "<" => DickValueProcess.LessThan(left, right),
-                "<=" => DickValueProcess.LessThanOrEqual(left, right),
-                ">" => DickValueProcess.GreaterThan(left, right),
-                ">=" => DickValueProcess.GreaterThanOrEqual(left, right),
-                "==" => DickValueProcess.IsEqual(left, right),
-                "!=" => DickValueProcess.NotEqual(left, right),
-                _ => throw new NotImplementedException()
-            };
         }
 
         public override object VisitFuncBlock([NotNull] FuncBlockContext context)

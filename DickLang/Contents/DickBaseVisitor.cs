@@ -75,6 +75,16 @@ public partial class DickBaseVisitor<Result> : AbstractParseTreeVisitor<Result>,
 	/// <return>The visitor result.</return>
 	public virtual Result VisitVariableDeclaration([NotNull] DickParser.VariableDeclarationContext context) { return VisitChildren(context); }
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="DickParser.ignmentSymbol"/>.
+	/// <para>
+	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+	/// on <paramref name="context"/>.
+	/// </para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	public virtual Result VisitIgnmentSymbol([NotNull] DickParser.IgnmentSymbolContext context) { return VisitChildren(context); }
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="DickParser.variableDef"/>.
 	/// <para>
 	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
@@ -94,6 +104,26 @@ public partial class DickBaseVisitor<Result> : AbstractParseTreeVisitor<Result>,
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	public virtual Result VisitType([NotNull] DickParser.TypeContext context) { return VisitChildren(context); }
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="DickParser.arrayLiteral"/>.
+	/// <para>
+	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+	/// on <paramref name="context"/>.
+	/// </para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	public virtual Result VisitArrayLiteral([NotNull] DickParser.ArrayLiteralContext context) { return VisitChildren(context); }
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="DickParser.arrayAccess"/>.
+	/// <para>
+	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+	/// on <paramref name="context"/>.
+	/// </para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	public virtual Result VisitArrayAccess([NotNull] DickParser.ArrayAccessContext context) { return VisitChildren(context); }
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="DickParser.ifBlock"/>.
 	/// <para>
@@ -185,6 +215,17 @@ public partial class DickBaseVisitor<Result> : AbstractParseTreeVisitor<Result>,
 	/// <return>The visitor result.</return>
 	public virtual Result VisitReturnStatement([NotNull] DickParser.ReturnStatementContext context) { return VisitChildren(context); }
 	/// <summary>
+	/// Visit a parse tree produced by the <c>arrayAccessExpression</c>
+	/// labeled alternative in <see cref="DickParser.expression"/>.
+	/// <para>
+	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+	/// on <paramref name="context"/>.
+	/// </para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	public virtual Result VisitArrayAccessExpression([NotNull] DickParser.ArrayAccessExpressionContext context) { return VisitChildren(context); }
+	/// <summary>
 	/// Visit a parse tree produced by the <c>parenthesesExpression</c>
 	/// labeled alternative in <see cref="DickParser.expression"/>.
 	/// <para>
@@ -195,6 +236,17 @@ public partial class DickBaseVisitor<Result> : AbstractParseTreeVisitor<Result>,
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	public virtual Result VisitParenthesesExpression([NotNull] DickParser.ParenthesesExpressionContext context) { return VisitChildren(context); }
+	/// <summary>
+	/// Visit a parse tree produced by the <c>arrayLiteralExpression</c>
+	/// labeled alternative in <see cref="DickParser.expression"/>.
+	/// <para>
+	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+	/// on <paramref name="context"/>.
+	/// </para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	public virtual Result VisitArrayLiteralExpression([NotNull] DickParser.ArrayLiteralExpressionContext context) { return VisitChildren(context); }
 	/// <summary>
 	/// Visit a parse tree produced by the <c>constantExpression</c>
 	/// labeled alternative in <see cref="DickParser.expression"/>.

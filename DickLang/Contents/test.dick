@@ -1,8 +1,8 @@
-﻿fuck MyFunction(dick x: int, dick y: int)
-{
-   // Print(x + y);
-   return 30 % 4 + y; 
-}
+﻿dick i = 0;
+dick a = [1,1,4,3,2];
 
-dick mf 8==D MyFunction(2, 1);
-Print(mf);
+until i < 5
+{
+   Print(a[i]);
+   i = i + 1;
+}

@@ -2,21 +2,32 @@ grammar Dick;
 
 program: line* EOF;
 
-line: statement | returnStatement | ifBlock | whileBlock | funcBlock;
+line:
+	statement
+	| returnStatement
+	| ifBlock
+	| whileBlock
+	| funcBlock;
 
 statement: (variableDeclaration | assignment | functionCall) ';';
 
 CONST: 'nig';
 
 variableDeclaration: (
-		'dick' (CONST)? IDENTIFIER (':' type) '8==D' expression
+		'dick' (CONST)? IDENTIFIER (':' type) ignmentSymbol expression
 	)
-	| ('dick' (CONST)? IDENTIFIER '8==D' expression)
+	| ('dick' (CONST)? IDENTIFIER ignmentSymbol expression)
 	| variableDef;
+
+ignmentSymbol: '=' | '8==D';
 
 variableDef: 'dick' (CONST)? IDENTIFIER (':' type)?;
 
-type: 'int' | 'str' | 'bool' | 'float';
+type: 'int' | 'str' | 'bool' | 'float' | 'array';
+
+arrayLiteral: '[' (expression (',' expression)*)? ']';
+
+arrayAccess: IDENTIFIER '[' expression ']';
 
 ifBlock: IF expression block ('else' elseIfBlock);
 
@@ -24,7 +35,7 @@ IF: 'if';
 
 elseIfBlock: block | ifBlock;
 
-whileBlock: WHILE expression block ('else' elseIfBlock);
+whileBlock: WHILE expression block ('else' elseIfBlock)?;
 
 WHILE: 'dolove' | 'until';
 
@@ -44,6 +55,8 @@ expression:
 	constant							# constantExpression
 	| IDENTIFIER						# identifierExpression
 	| functionCall						# functionCallExpression
+	| arrayLiteral						# arrayLiteralExpression
+	| arrayAccess						# arrayAccessExpression
 	| '(' expression ')'				# parenthesesExpression
 	| '!' expression					# notExpression
 	| expression multOp expression		# multiplicationExpression

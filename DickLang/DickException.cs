@@ -53,13 +53,13 @@ namespace DickLang
     {
         public static void Out(int line = -1, int charPositionInLine = -1, string offendingSymbol = null, string msg = "", bool exit = true)
         {
-            foreach (var v in DickGet.Variables)
-            { Console.WriteLine($"{v.Key}: {v.Value}".Pastel(Color.Aqua)); }
+            //foreach (var v in DickGet.Variables)
+            //{ Console.WriteLine($"{v.Key}: {v.Value}".Pastel(Color.Aqua)); }
 
             string fileName = Program.fileName;
             string lineText;
 
-            if (charPositionInLine == -1)
+            if (charPositionInLine == -1 && offendingSymbol != null)
             {
                 charPositionInLine = DickGet.CurrentLineText.IndexOf(offendingSymbol);
             }
@@ -95,26 +95,30 @@ namespace DickLang
             ColoredConsole.WriteLine(msg);
             ColoredConsole.Write("At fucking file-> ", ConsoleColor.Blue);
             ColoredConsole.WriteLine($"{fileName}");
-            ColoredConsole.Write("At fucking pos -> ", ConsoleColor.Blue);
-            ColoredConsole.WriteLine($"{line}:{charPositionInLine}");
 
-            Console.Write("    | \n    ");
-            ColoredConsole.WriteBackspaces(line.ToString());
-
-            Console.Write($"{line} ");
-
-
-            Console.WriteLine(lineText);
-
-            Console.Write("    | ");
-
-            for (int i = 0; i < charPositionInLine; i++)
+            if (offendingSymbol != null)
             {
-                Console.Write(" ");
-            }
-            for (int i = 0; i < offendingSymbol.Length; i++)
-            {
-                ColoredConsole.Write("^", ConsoleColor.Red);
+                ColoredConsole.Write("At fucking pos -> ", ConsoleColor.Blue);
+                ColoredConsole.WriteLine($"{line}:{charPositionInLine}");
+
+                Console.Write("    | \n    ");
+                ColoredConsole.WriteBackspaces(line.ToString());
+
+                Console.Write($"{line} ");
+
+
+                Console.WriteLine(lineText);
+
+                Console.Write("    | ");
+
+                for (int i = 0; i < charPositionInLine; i++)
+                {
+                    Console.Write(" ");
+                }
+                for (int i = 0; i < offendingSymbol.Length; i++)
+                {
+                    ColoredConsole.Write("^", ConsoleColor.Red);
+                }
             }
 
             ColoredConsole.WriteLine($" - {msg}", ConsoleColor.Red);
